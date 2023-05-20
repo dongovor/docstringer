@@ -5,6 +5,7 @@ import utils
 def main():
     try:
         check_results = {}
+
         # Prompt user for input file/folder path
         input_path = input("Please enter the path to the file/folder you'd like to check ").strip('"').strip("'").strip()
 
@@ -26,7 +27,7 @@ def main():
         utils.write_to_json(path_to_save, check_results)
 
         # uncomment the following line to display the contents of the created file
-        utils.test_resuls(path_to_save)
+        # utils.test_resuls(path_to_save)
 
     except Exception as main_error:
         print(main_error)
