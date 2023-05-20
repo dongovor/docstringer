@@ -2,6 +2,7 @@ import os
 import ast
 import json
 import pathlib
+import getpass
 
 def check_os_type():
     """
@@ -54,6 +55,7 @@ def check_docstrings(file_path):
 
         elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             if not node.body or not isinstance(node.body[0], ast.Expr) or not isinstance(node.body[0].value, ast.Str):
+                print(node.name)
                 no_docstrings.append(f'{node.name}{args_string}')
 
     return no_docstrings
@@ -96,7 +98,7 @@ def iterate_through_folder(folderpath):
             print(f'Checking: {filepath}')
             if os.path.isfile(filepath):
                 result = check_docstrings(filepath)
-                checked_files[filepath] = result
+                checked_files[filepath.replace(getpass.getuser(), "<username>")] = result
     except FileNotFoundError:
         print(f"Error: Folder not found at {folderpath}. Please try again.")
 
